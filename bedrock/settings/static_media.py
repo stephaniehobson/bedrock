@@ -221,6 +221,14 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/dnt-bundle.css',
     },
+    'firefox': {
+        'source_filenames': (
+            'css/newsletter/fxnewsletter-subscribe.less',
+            'css/firefox/family-nav.less',
+            'css/firefox/firefox.less',
+        ),
+        'output_filename': 'css/firefox-bundle.css',
+    },
     'firefox_accounts': {
         'source_filenames': (
             'css/base/mozilla-fxa-iframe.less',
@@ -1126,6 +1134,14 @@ PIPELINE_JS = {
             'js/base/gtm-snippet.js',
         ),
         'output_filename': 'js/gtm-snippet-bundle.js',
+    },
+    'firefox': {
+        'source_filenames': (
+            'js/libs/jquery.waypoints.min.js',
+            'js/libs/jquery.waypoints-sticky.min.js',
+            'js/firefox/family-nav.js',
+        ),
+        'output_filename': 'js/firefox-bundle.js',
     },
     'firefox_accounts': {
         'source_filenames': (
