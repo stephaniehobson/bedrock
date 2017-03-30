@@ -12,6 +12,10 @@
     var _page = document.getElementsByTagName('html')[0];
     var _navLinks;
 
+    // feature detects
+    var _supportsTransition = 'transition' in document.documentElement.style;
+    var _supportsBoundingClientRect = 'getBoundingClientRect' in document.createElement('div');
+
     /**
      * Determine if node is a child element of a given parent.
      * @param {Object} parent - DOM parent node.
@@ -30,12 +34,13 @@
     };
 
     /**
-     * Return Y position for an element on the page, taking scroll Y offset into account.
+     * Scrolls an element into visible viewport
      * @param {Object} el - DOM node.
-     * @return {Number}
      */
-    var _getYOffset = function(el) {
-        return el.getBoundingClientRect().top + window.pageYOffset;
+    var _scrollElementIntoView = function(el) {
+        if (_supportsBoundingClientRect) {
+            window.scrollTo(0, (el.getBoundingClientRect().top - document.body.getBoundingClientRect().top) - 20);
+        }
     };
 
     /**
@@ -95,24 +100,38 @@
         },
 
         /**
-         * Adjust scroll position Y offset to location of element.
+         * Adjust scroll position to Y offset of accordion after expand.
          * @param {Object} el - DOM node to be scrolled to.
          */
-        adjustScrollPosition: function(el) {
-            var scrollPosition = window.pageYOffset;
-            var scrollTimeout;
+        handleAccordionTransition: function(heading) {
+            var selectedMenu = document.querySelector('.nav-menu-primary-links > li > .summary.selected + .detail');
+            var originalScrollPosition = window.pageYOffset;
+            var scrollThreshold = 100; // has user has scrolled down from top of viewport.
 
-            clearTimeout(scrollTimeout);
+            var onTransitionEnd = function(e) {
+                var scrollPosition = window.pageYOffset;
 
-            // If visitor has scrolled down the page a little.
-            if (scrollPosition && scrollPosition > 100) {
-                // set a timeout to adjust the scroll position to just above the manu that was opened.
-                scrollTimeout = setTimeout(function() {
-                    // but only do it if the user hasn't scrolled independently during that time.
-                    if (scrollPosition === window.pageYOffset) {
-                        window.scrollTo(0, _getYOffset(el) - 20);
-                    }
-                }, 400);
+                if (e.propertyName !== 'max-height') {
+                    return;
+                }
+
+                // only adjust scroll position if user has not already scrolled independently.
+                if (scrollPosition > scrollThreshold && scrollPosition === originalScrollPosition) {
+                    _scrollElementIntoView(heading);
+                }
+
+                selectedMenu.removeEventListener('transitionend', onTransitionEnd, false);
+            };
+
+            if (selectedMenu) {
+                // if we support transitions, wait until accordion expands.
+                if (_supportsTransition) {
+                    selectedMenu.addEventListener('transitionend', onTransitionEnd, false);
+                }
+                // else adjust scroll position straight away.
+                else if (originalScrollPosition > scrollThreshold) {
+                    _scrollElementIntoView(heading);
+                }
             }
         },
 
@@ -129,14 +148,16 @@
                     mozGlobalNav.selectNavLink(id);
                     mozGlobalNav.closeSecondaryMenuItems();
                     interaction = 'expand';
-
-                    // When expanding a menu, adjust the scroll position if needed.
-                    mozGlobalNav.adjustScrollPosition(heading);
                 } else {
                     interaction = 'collapse';
                 }
 
                 heading.classList.toggle('selected');
+
+                if (heading.classList.contains('selected')) {
+                    // When expanding a menu, adjust the scroll position if needed.
+                    mozGlobalNav.handleAccordionTransition(heading);
+                }
 
                 window.dataLayer.push({
                     'event': 'global-nav',
