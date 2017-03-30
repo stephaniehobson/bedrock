@@ -9,7 +9,7 @@
 
 $color-firefox-light-orange: #ff9500;
 
-$mq-nav-tablet:     'screen and (min-width: 820px)';
+$mq-nav-tablet:     'screen and (min-width: 850px)';
 $mq-nav-desktop:    'screen and (min-width: 1050px)';
 
 /* -------------------------------------------------------------------------- */
@@ -412,7 +412,7 @@ html.moz-nav-open {
         background: inherit;
         border-radius: 0;
         border: 1px solid $color-firefox-light-orange;
-        color: $color-firefox-light-orange;
+        color: darken($color-firefox-light-orange, 5%);
         display: inline-block;
         padding: 13px 10px;
         text-decoration: none;
