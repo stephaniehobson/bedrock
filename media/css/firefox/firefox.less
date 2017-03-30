@@ -7,6 +7,20 @@
 @blue: #0a99d5;
 @grey: #EFEFEF;
 
+// generates a < tablet media query for all sections (except intro)
+.common-mobile-props(@padding: 250px) {
+    @media only screen and (max-width: @breakTablet) {
+        background-position: bottom 20px center;
+        min-height: 0;
+        padding-bottom: @padding;
+
+        .copy {
+            float: none;
+            width: auto;
+        }
+    }
+}
+
 #outer-wrapper {
     background: @grey;
 }
@@ -70,6 +84,7 @@
     }
 
     @media only screen and (max-width: @breakTablet) {
+        background-position: bottom 20px center;
         width: @widthMobileLandscape - 40px;
     }
 
@@ -213,24 +228,15 @@ h3 {
 
 #fast .content {
     .at2x('/media/img/firefox/template/logo-jumbo.png', 256px, 266px);
+    .common-mobile-props(316px);
     background-position: top right 20px;
     min-height: 266px;
-
-    @media only screen and (max-width: @breakTablet) {
-        background-position: bottom 20px center;
-        min-height: 0;
-        padding-bottom: 316px;
-
-        .copy {
-            width: auto;
-        }
-    }
 }
 
 #private-browsing .content {
     .at2x('/media/img/firefox/firefox/private-browsing.png', 400px, 243px);
+    .common-mobile-props(232px);
     background-position: top left 20px;
-    background-size: 400px 243px;
     min-height: 243px;
 
     .copy {
@@ -240,58 +246,32 @@ h3 {
     @media only screen and (max-width: @breakDesktop) {
         .background-size(300px 182px);
     }
-
-    @media only screen and (max-width: @breakTablet) {
-        background-position: bottom 20px center;
-        min-height: 0;
-        padding-bottom: 232px;
-
-        .copy {
-            float: none;
-        }
-    }
 }
 
 #better .content {
-    .at2x('/media/img/firefox/firefox/better.png', 400px, 314px);
+    .at2x('/media/img/firefox/firefox/better.png', 400px, 317px);
+    .common-mobile-props(288px);
     background-position: top right 20px;
-    background-size: 400px 314px;
     min-height: 314px;
 
     @media only screen and (max-width: @breakDesktop) {
-        .background-size(300px 235px);
-        min-height: 235px;
-    }
-
-    @media only screen and (max-width: @breakTablet) {
-        background-position: bottom 20px center;
-        min-height: 0;
-        padding-bottom: 285px;
+        .background-size(300px 238px);
+        min-height: 238px;
     }
 }
 
 #everywhere .content {
-    .at2x('/media/img/firefox/firefox/everywhere.png', 400px, 232px);
+    .at2x('/media/img/firefox/firefox/everywhere.png', 400px, 234px);
+    .common-mobile-props(226px);
     background-position: top left 20px;
-    background-size: 400px 232px;
-    min-height: 335px;
+    min-height: 234px;
 
     .copy {
         float: right;
     }
 
     @media only screen and (max-width: @breakDesktop) {
-        .background-size(300px 174px);
-    }
-
-    @media only screen and (max-width: @breakTablet) {
-        background-position: bottom 20px center;
-        min-height: 0;
-        padding-bottom: 224px;
-
-        .copy {
-            float: none;
-        }
+        .background-size(300px 176px);
     }
 }
 
