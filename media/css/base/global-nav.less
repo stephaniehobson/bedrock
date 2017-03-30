@@ -39,14 +39,16 @@
     .nav-button-menu {
         -moz-appearance: none;
         -webkit-appearance: none;
-        font-size: 0;
+        appearance: none;
         background: transparent;
         border: none;
+        cursor: pointer;
         float: left;
+        font-size: 0;
         height: 25px;
         margin: 13px 0;
-        width: 50px;
         padding: 0;
+        width: 50px;
 
         .p1,
         .p2,
@@ -71,6 +73,12 @@
 
         &:focus {
             outline: none;
+
+            .p1,
+            .p2,
+            .p3 {
+                fill: #646464;
+            }
         }
 
         &::-moz-focus-inner {
@@ -94,13 +102,13 @@
         a {
             display: block;
             height: 25px;
-        }
 
-        &:hover .p,
-        &:focus .p,
-        &:active .p {
-            fill: #646464;
-            transition: fill 0.1s ease-in-out;
+            &:hover .p,
+            &:focus .p,
+            &:active .p {
+                fill: #646464;
+                transition: fill 0.1s ease-in-out;
+            }
         }
 
         @media only screen and (max-width: @breakNavDesktop) {
@@ -112,7 +120,7 @@
     .nav-horizontal-menu {
         .clearfix;
         margin-left: 17px;
-        padding: 40px 0 10px 0;
+        padding: 40px 0 10px;
         position: relative;
         overflow: hidden;
 
@@ -221,7 +229,6 @@
         -moz-appearance: none;
         -webkit-appearance: none;
         .font-size(13px);
-        .open-sans-light;
         background: url('/media/img/nav/drawer-close.svg') left center no-repeat;
         border: none;
         color: #000;
@@ -266,7 +273,6 @@
         .font-size(18px);
         padding-bottom: 20px;
         text-shadow: none;
-        .open-sans;
         font-weight: bold;
 
         a:link,
@@ -316,7 +322,17 @@
 
 .moz-global-nav,
 .moz-global-nav-drawer {
-    .item-cyan {
+
+    .item-firefox {
+        a:hover,
+        a:active,
+        a:focus,
+        a.selected {
+            color: @colorFirefoxLightOrange;
+        }
+    }
+
+    .item-internet-health {
         a:hover,
         a:active,
         a:focus,
@@ -325,7 +341,7 @@
         }
     }
 
-    .item-lilac {
+    .item-technology {
         a:hover,
         a:active,
         a:focus,
@@ -334,7 +350,7 @@
         }
     }
 
-    .item-lime {
+    .item-about-us {
         a:hover,
         a:active,
         a:focus,
@@ -343,21 +359,12 @@
         }
     }
 
-    .item-coral {
+    .item-get-involved {
         a:hover,
         a:active,
         a:focus,
         a.selected {
             color: @colorBrandCoral;
-        }
-    }
-
-    .item-orange {
-        a:hover,
-        a:active,
-        a:focus,
-        a.selected {
-            color: @colorFirefoxLightOrange;
         }
     }
 }
@@ -401,19 +408,17 @@ html.moz-nav-open {
         }
     }
 
-    .download-link {
-        &:link,
-        &:visited {
-            .font-size(14px);
-            background: inherit;
-            border-radius: 0;
-            border: 1px solid @colorFirefoxLightOrange;
-            color: @colorFirefoxLightOrange;
-            display: inline-block;
-            padding: 13px 20px;
-            text-decoration: none;
-            transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
-        }
+    .download-link:link,
+    .download-link:visited {
+        .font-size(14px);
+        background: inherit;
+        border-radius: 0;
+        border: 1px solid @colorFirefoxLightOrange;
+        color: @colorFirefoxLightOrange;
+        display: inline-block;
+        padding: 13px 20px;
+        text-decoration: none;
+        transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 
         &:hover,
         &:focus,
@@ -552,7 +557,7 @@ html.moz-nav-open {
             .font-size(14px);
             background-color: #000;
             bottom: 0;
-            color: #fff;
+            color: inherit;
             left: 0;
             line-height: 1.3;
             margin: 0;
@@ -563,6 +568,7 @@ html.moz-nav-open {
 
         .meta {
             .font-size(13px);
+            color: #fff;
             display: block;
             font-style: italic;
             padding: 0 0 5px 5px;

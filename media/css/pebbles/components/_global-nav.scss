@@ -39,14 +39,16 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
     .nav-button-menu {
         -moz-appearance: none;
         -webkit-appearance: none;
-        font-size: 0;
+        appearance: none;
         background: transparent;
         border: none;
+        cursor: pointer;
         float: left;
+        font-size: 0;
         height: 25px;
         margin: 13px 0;
-        width: 50px;
         padding: 0;
+        width: 50px;
 
         .p1,
         .p2,
@@ -71,6 +73,12 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
 
         &:focus {
             outline: none;
+
+            .p1,
+            .p2,
+            .p3 {
+                fill: #646464;
+            }
         }
 
         &::-moz-focus-inner {
@@ -94,13 +102,13 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
         a {
             display: block;
             height: 25px;
-        }
 
-        &:hover .p,
-        &:focus .p,
-        &:active .p {
-            fill: #646464;
-            transition: fill 0.1s ease-in-out;
+            &:hover .p,
+            &:focus .p,
+            &:active .p {
+                fill: #646464;
+                transition: fill 0.1s ease-in-out;
+            }
         }
 
         @media #{$mq-nav-desktop} {
@@ -112,7 +120,7 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
     .nav-horizontal-menu {
         @include clearfix;
         margin-left: 10px;
-        padding: 40px 0 10px 0;
+        padding: 40px 0 10px;
         position: relative;
         overflow: hidden;
 
@@ -221,7 +229,6 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
     .nav-drawer-close-button {
         -moz-appearance: none;
         -webkit-appearance: none;
-        @include fira-sans-light;
         @include font-size(13px);
         background: url('/media/img/nav/drawer-close.svg') left center no-repeat;
         border: none;
@@ -313,7 +320,17 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
 
 .moz-global-nav,
 .moz-global-nav-drawer {
-    .item-cyan {
+
+    .item-firefox {
+        a:hover,
+        a:active,
+        a:focus,
+        a.selected {
+            color: $color-firefox-light-orange;
+        }
+    }
+
+    .item-internet-health {
         a:hover,
         a:active,
         a:focus,
@@ -322,7 +339,7 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
         }
     }
 
-    .item-lilac {
+    .item-technology {
         a:hover,
         a:active,
         a:focus,
@@ -331,7 +348,7 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
         }
     }
 
-    .item-lime {
+    .item-about-us {
         a:hover,
         a:active,
         a:focus,
@@ -340,21 +357,12 @@ $mq-nav-desktop:    'screen and (min-width: 1050px)';
         }
     }
 
-    .item-coral {
+    .item-get-involved {
         a:hover,
         a:active,
         a:focus,
         a.selected {
             color: $color-brand-coral;
-        }
-    }
-
-    .item-orange {
-        a:hover,
-        a:active,
-        a:focus,
-        a.selected {
-            color: $color-firefox-light-orange;
         }
     }
 }
@@ -398,19 +406,17 @@ html.moz-nav-open {
         }
     }
 
-    .download-link {
-        &:link,
-        &:visited {
-            @include font-size(14px);
-            background: inherit;
-            border-radius: 0;
-            border: 1px solid $color-firefox-light-orange;
-            color: $color-firefox-light-orange;
-            display: inline-block;
-            padding: 13px 10px;
-            text-decoration: none;
-            transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
-        }
+    .download-link:link,
+    .download-link:visited {
+        @include font-size(14px);
+        background: inherit;
+        border-radius: 0;
+        border: 1px solid $color-firefox-light-orange;
+        color: $color-firefox-light-orange;
+        display: inline-block;
+        padding: 13px 10px;
+        text-decoration: none;
+        transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 
         &:hover,
         &:focus,
@@ -546,11 +552,10 @@ html.moz-nav-open {
         }
 
         figcaption {
-            @include fira-sans-light;
             @include font-size(14px);
             background-color: #000;
             bottom: 0;
-            color: #fff;
+            color: inherit;
             left: 0;
             line-height: 1.3;
             margin: 0;
@@ -561,6 +566,7 @@ html.moz-nav-open {
 
         .meta {
             @include font-size(13px);
+            color: #fff;
             display: block;
             font-style: italic;
             padding: 0 0 5px 5px;

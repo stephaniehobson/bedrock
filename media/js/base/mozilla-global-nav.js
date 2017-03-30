@@ -72,10 +72,11 @@
 
                 mozGlobalNav.clearSelectedNavLink();
                 mozGlobalNav.closeSecondaryMenuItems();
-                _menuButton.focus();
 
                 document.removeEventListener('keydown', mozGlobalNav.handleEscKey, false);
                 _page.removeEventListener('focusin', mozGlobalNav.handleDrawerFocusOut, false);
+
+                _menuButton.focus();
             }
 
             window.dataLayer.push({

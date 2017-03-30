@@ -22,11 +22,11 @@
       </h2>
 
       <ul class="nav-primary-links">
-        <li class="item-orange"><a href="{{ url('firefox.new') }}" data-id="firefox">{{ _('Firefox') }}</a></li>
-        <li class="item-cyan"><a href="{{ url('mozorg.internet-health') }}" data-id="internet-health">{{ _('Internet Health') }}</a></li>
-        <li class="item-lilac"><a href="{{ url('mozorg.technology') }}" data-id="technology">{{ _('Technology') }}</a></li>
-        <li class="item-lime"><a href="{{ url('mozorg.about') }}" data-id="about-us">{{ _('About Us') }}</a></li>
-        <li class="item-coral"><a href="{{ url('mozorg.contribute.index') }}" data-id="get-involved">{{ _('Get Involved') }}</a></li>
+        <li class="item-firefox"><a href="{{ url('firefox.new') }}" data-id="firefox">{{ _('Firefox') }}</a></li>
+        <li class="item-internet-health"><a href="{{ url('mozorg.internet-health') }}" data-id="internet-health">{{ _('Internet Health') }}</a></li>
+        <li class="item-technology"><a href="{{ url('mozorg.technology') }}" data-id="technology">{{ _('Technology') }}</a></li>
+        <li class="item-about-us"><a href="{{ url('mozorg.about') }}" data-id="about-us">{{ _('About Us') }}</a></li>
+        <li class="item-get-involved"><a href="{{ url('mozorg.contribute.index') }}" data-id="get-involved">{{ _('Get Involved') }}</a></li>
       </ul>
 
       {{ download_firefox(alt_copy=_('Download Firefox'), dom_id='global-nav-download-firefox') }}
@@ -38,7 +38,7 @@
   <button type="button" class="nav-drawer-close-button" id="nav-drawer-close-button" aria-controls="moz-global-nav-drawer">{{_('Close')}}</button>
 
   <ul class="nav-menu-primary-links">
-    <li class="item-orange">
+    <li class="item-firefox">
       <h3 class="summary"><a href="{{ url('firefox.new') }}" data-id="firefox">{{ _('Firefox') }}</a></h3>
       <div class="detail">
         <div class="detail-container">
@@ -100,7 +100,7 @@
         </div>
       </div>
     </li>
-    <li class="item-cyan">
+    <li class="item-internet-health">
       <h3 class="summary"><a href="{{ url('mozorg.internet-health') }}" data-id="internet-health">{{ _('Internet Health') }}</a></h3>
       <div class="detail">
         <div class="detail-container">
@@ -153,7 +153,7 @@
         </div>
       </div>
     </li>
-    <li class="item-lilac">
+    <li class="item-technology">
       <h3 class="summary"><a href="{{ url('mozorg.technology') }}" data-id="technology">{{ _('Technology') }}</a></h3>
       <div class="detail">
         <div class="detail-container">
@@ -196,7 +196,7 @@
         </div>
       </div>
     </li>
-    <li class="item-lime">
+    <li class="item-about-us">
       <h3 class="summary"><a href="{{ url('mozorg.about') }}" data-id="about-us">{{ _('About Us') }}</a></h3>
       <div class="detail">
         <div class="detail-container">
@@ -244,7 +244,7 @@
         </div>
       </div>
     </li>
-    <li class="item-coral">
+    <li class="item-get-involved">
       <h3 class="summary"><a href="{{ url('mozorg.contribute.index') }}" data-id="get-involved">{{ _('Get Involved') }}</a></h3>
       <div class="detail">
         <div class="detail-container">
