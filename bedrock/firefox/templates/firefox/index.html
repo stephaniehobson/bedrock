@@ -20,7 +20,7 @@
 {% block site_header %}{% endblock %}
 
 {% block site_header_unwrapped %}
-  {% call fxfamilynav('desktop') %}
+  {% call fxfamilynav('firefox') %}
     {{ download_firefox(dom_id="sticky-download-desktop", alt_copy=_('Download')) }}
   {% endcall %}
 {% endblock %}
@@ -139,7 +139,7 @@
 
 <section class="content-section" id="today">
   <div class="content">
-    <h3>{{ _('Get Firefox for desktop today.') }}</h3>
+    <h3>{{ _('Get Firefox today.') }}</h3>
 
     {{ download_firefox(dom_id="download-firefox-today") }}
   </div>
