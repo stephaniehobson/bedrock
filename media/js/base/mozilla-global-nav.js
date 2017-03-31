@@ -13,8 +13,9 @@
     var _navLinks;
 
     // feature detects
-    var _supportsTransition = 'transition' in document.documentElement.style;
     var _supportsBoundingClientRect = 'getBoundingClientRect' in document.createElement('div');
+    var _featureQueriesSupported = typeof CSS !== 'undefined' && typeof CSS.supports !== 'undefined';
+    var _supportsTransition = _featureQueriesSupported && CSS.supports('transition', 'max-height .6s ease-in-out');
 
     /**
      * Determine if node is a child element of a given parent.
