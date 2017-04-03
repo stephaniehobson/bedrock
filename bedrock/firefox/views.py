@@ -518,12 +518,3 @@ def ios_testflight(request):
     return l10n_utils.render(request,
                              'firefox/testflight.html',
                              {'newsletter_form': newsletter_form})
-
-
-def firefox(request):
-    locale = l10n_utils.get_locale(request)
-
-    if locale != 'en-US':
-        return HttpResponseRedirect(reverse('firefox.new'))
-    else :
-        return l10n_utils.render(request, 'firefox/index.html')

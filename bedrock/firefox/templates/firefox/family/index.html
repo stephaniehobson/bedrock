@@ -4,6 +4,12 @@
 
 {% extends "firefox/base-resp.html" %}
 
+{% block experiments %}
+  {% if LANG == 'en-US' %}
+    {% javascript 'experiment_firefox_family' %}
+  {% endif %}
+{% endblock %}
+
 {% block page_title_prefix %}{% endblock %}
 {% block page_title %}
 {% if l10n_has_tag('fx49_remove_hello') %}
@@ -17,7 +23,7 @@
 {% block page_desc %}{{ _('Learn more about our complete lineup of products for desktop and mobile browsing (and more) that help keep you in control online. Free yourself with Firefox.') }}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_family' %}
+  {% stylesheet 'firefox_family_index' %}
 {% endblock %}
 
 {% block body_class %}mozid{% endblock %}

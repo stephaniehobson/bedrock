@@ -221,14 +221,6 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/dnt-bundle.css',
     },
-    'firefox': {
-        'source_filenames': (
-            'css/newsletter/fxnewsletter-subscribe.less',
-            'css/firefox/family-nav.less',
-            'css/firefox/firefox.less',
-        ),
-        'output_filename': 'css/firefox-bundle.css',
-    },
     'firefox_accounts': {
         'source_filenames': (
             'css/base/mozilla-fxa-iframe.less',
@@ -348,12 +340,20 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/firefox-interest-dashboard-bundle.css',
     },
-    'firefox_family': {
+    'firefox_family_index': {
         'source_filenames': (
             'css/newsletter/fxnewsletter-subscribe.less',
             'css/firefox/family/index.less',
         ),
-        'output_filename': 'css/firefox-family-bundle.css',
+        'output_filename': 'css/firefox_family_index-bundle.css',
+    },
+    'firefox_family_index_b': {
+        'source_filenames': (
+            'css/newsletter/fxnewsletter-subscribe.less',
+            'css/firefox/family-nav.less',
+            'css/firefox/family/index-b.less',
+        ),
+        'output_filename': 'css/firefox_family_index_b-bundle.css',
     },
     'firefox_faq': {
         'source_filenames': (
@@ -1135,14 +1135,6 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/gtm-snippet-bundle.js',
     },
-    'firefox': {
-        'source_filenames': (
-            'js/libs/jquery.waypoints.min.js',
-            'js/libs/jquery.waypoints-sticky.min.js',
-            'js/firefox/family-nav.js',
-        ),
-        'output_filename': 'js/firefox-bundle.js',
-    },
     'firefox_accounts': {
         'source_filenames': (
             'js/base/mozilla-fxa-iframe.js',
@@ -1340,6 +1332,21 @@ PIPELINE_JS = {
             'js/firefox/family-index.js',
         ),
         'output_filename': 'js/firefox_family_index-bundle.js',
+    },
+    'firefox_family_index_b': {
+        'source_filenames': (
+            'js/libs/jquery.waypoints.min.js',
+            'js/libs/jquery.waypoints-sticky.min.js',
+            'js/firefox/family-nav.js',
+        ),
+        'output_filename': 'js/firefox_family_index_b-bundle.js',
+    },
+    'experiment_firefox_family': {
+        'source_filenames': (
+            'js/base/mozilla-traffic-cop.js',
+            'js/firefox/experiment-firefox-family.js',
+        ),
+        'output_filename': 'js/experiment_firefox_family-bundle.js',
     },
     'firefox_faq': {
         'source_filenames': (

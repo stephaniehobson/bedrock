@@ -27,8 +27,7 @@ ios_sysreq_re = sysreq_re.replace('firefox', 'firefox/ios')
 
 
 urlpatterns = (
-    #redirect(r'^firefox/$', 'firefox.new', name='firefox', locale_prefix=False),
-    url(r'^firefox/$', views.firefox, name='firefox'),
+    redirect(r'^firefox/$', 'firefox.new', name='firefox', locale_prefix=False),
     url(r'^firefox/(?:%s/)?(?:%s/)?all/$' % (platform_re, channel_re),
         views.all_downloads, name='firefox.all'),
     page('firefox/accounts', 'firefox/accounts.html'),
@@ -50,7 +49,11 @@ urlpatterns = (
     url(r'^firefox/ios/testflight', views.ios_testflight, name='firefox.ios.testflight'),
     page('firefox/mobile-download', 'firefox/mobile-download.html'),
     page('firefox/mobile-download/desktop', 'firefox/mobile-download-desktop.html'),
-    page('firefox/products', 'firefox/family/index.html'),
+    url('^firefox/products/$',
+        VariationTemplateView.as_view(template_name='firefox/family/index.html',
+                                      template_name_variations=['b'],
+                                      variation_locales=['en-US']),
+        name='firefox.family.index'),
     page('firefox/private-browsing', 'firefox/private-browsing.html'),
     url('^firefox/send-to-device-post/$', views.send_to_device_ajax,
         name='firefox.send-to-device-post'),
