@@ -95,26 +95,20 @@
             document.addEventListener('keydown', mozGlobalNav.handleEscKey, false);
             _page.addEventListener('focusin', mozGlobalNav.handleDrawerFocusOut, false);
 
-            window.dataLayer.push({
-                'event': 'global-nav',
-                'interaction': 'menu-open'
-            });
+            _drawer.setAttribute('aria-hidden', 'false');
         },
 
         onDrawerClose: function() {
             document.removeEventListener('keydown', mozGlobalNav.handleEscKey, false);
             _page.removeEventListener('focusin', mozGlobalNav.handleDrawerFocusOut, false);
 
+            _drawer.setAttribute('aria-hidden', 'true');
+
             // clear selected link in horizontal primary navigation
             mozGlobalNav.clearSelectedNavLink();
 
             // return focus to the menu button.
             _menuButton.focus();
-
-            window.dataLayer.push({
-                'event': 'global-nav',
-                'interaction': 'menu-close'
-            });
         },
 
         // Keeps keyboard focus in the drawer when in open state.
@@ -164,9 +158,8 @@
 
         // Toggle vertical navigation menu in the side drawer.
         toggleDrawerMenu: function(id) {
-            var link = document.querySelector('.nav-menu-primary-links > li > .summary > a[data-id="'+ id +'"]');
+            var link = document.querySelector('.nav-menu-primary-links > li > .summary[data-id="'+ id +'"] > a');
             var heading = link.parentNode;
-            var interaction;
 
             if (link && heading && heading.classList.contains('summary')) {
                 link.focus();
@@ -174,32 +167,52 @@
                 if (!heading.classList.contains('selected')) {
                     mozGlobalNav.selectNavLink(id);
                     mozGlobalNav.closeSecondaryMenuItems();
-                    interaction = 'expand';
-                } else {
-                    interaction = 'collapse';
                 }
 
                 heading.classList.toggle('selected');
 
                 if (heading.classList.contains('selected')) {
+                    // Set aria roles for expanded state.
+                    heading.setAttribute('aria-selected', 'true');
+                    heading.setAttribute('aria-expanded', 'true');
+                    document.querySelector('.nav-menu-primary-links > li > .summary[data-id="'+ id +'"] + .detail').setAttribute('aria-hidden', 'false');
+
+                    // Set GA attribute for next time heading is clicked.
+                    link.setAttribute('data-link-name', 'collapse');
+
                     // When expanding a menu, adjust the scroll position if needed.
                     mozGlobalNav.handleAccordionTransition(heading);
-                }
+                } else {
+                    // Set aria roles for collapsed state.
+                    heading.setAttribute('aria-selected', 'false');
+                    heading.setAttribute('aria-expanded', 'false');
+                    document.querySelector('.nav-menu-primary-links > li > .summary[data-id="'+ id +'"] + .detail').setAttribute('aria-hidden', 'true');
 
-                window.dataLayer.push({
-                    'event': 'global-nav',
-                    'interaction': 'secondary-nav-' + interaction,
-                    'secondary-nav-heading': id
-                });
+                    // Set GA attribute for next time heading is clicked.
+                    link.setAttribute('data-link-name', 'expand');
+                }
             }
         },
 
         // Closes all vertical navigation menu items.
         closeSecondaryMenuItems: function() {
-            var menuLinks = document.querySelectorAll('.nav-menu-primary-links > li > .summary');
+            var menu = document.querySelector('.nav-menu-primary-links');
+            var summary = menu.querySelectorAll('.summary');
+            var detail = menu.querySelectorAll('.detail');
+            var links = menu.querySelectorAll('.summary > a');
 
-            for (var i = 0; i < menuLinks.length; i++) {
-                menuLinks[i].classList.remove('selected');
+            for (var i = 0; i < summary.length; i++) {
+                summary[i].classList.remove('selected');
+                summary[i].setAttribute('aria-selected', 'false');
+                summary[i].setAttribute('aria-expanded', 'false');
+            }
+
+            for (var j = 0; j < detail.length; j++) {
+                detail[j].setAttribute('aria-hidden', 'true');
+            }
+
+            for (var k = 0; k < links.length; k++) {
+                links[k].setAttribute('data-link-name', 'expand');
             }
         },
 
@@ -208,11 +221,12 @@
          * @param (String) - id of item to be selected
          */
         selectNavLink: function(id) {
-            var target = document.querySelector('.nav-primary-links > li > a[data-id="' + id + '"]');
+            var target = document.querySelector('.nav-primary-links > li > .summary[data-id="' + id + '"] > a');
 
             if (target) {
                 mozGlobalNav.clearSelectedNavLink();
                 target.classList.add('selected');
+                target.setAttribute('aria-selected', 'true');
             }
         },
 
@@ -242,7 +256,7 @@
         // Handle clicks on the vertical drawer navigation links.
         handleDrawerLinkClick: function(e) {
             e.preventDefault();
-            var target = e.target.getAttribute('data-id');
+            var target = e.target.parentNode.getAttribute('data-id');
 
             if (target) {
                 mozGlobalNav.toggleDrawerMenu(target);
@@ -280,6 +294,48 @@
         },
 
         /**
+         * Sets initial WAI-ARIA roles for global navigation state
+         */
+        initARIARoles: function() {
+            var accordion = document.querySelector('.nav-menu-primary-links');
+            var accordionItems = document.querySelectorAll('.nav-menu-primary-links > li');
+            var accordionHeadings = accordion.querySelectorAll('.summary');
+            var rolePrefix = 'moz-global-nav-item-';
+            var detail;
+
+            accordion.setAttribute('role', 'tablist');
+            document.querySelector('.nav-primary-links').setAttribute('role', 'tablist');
+
+            // Vertical drawer accordion headings.
+            for (var i = 0; i < accordionHeadings.length; i++) {
+                accordionHeadings[i].setAttribute('role', 'tab');
+                accordionHeadings[i].setAttribute('aria-selected', 'false');
+                accordionHeadings[i].setAttribute('aria-expanded', 'false');
+                accordionHeadings[i].setAttribute('aria-controls',
+                    rolePrefix + accordionHeadings[i].getAttribute('data-id'));
+            }
+
+            // Horizontal navigation links.
+            for (var j = 0; j < _navLinks.length; j++) {
+                _navLinks[j].setAttribute('role', 'tab');
+                _navLinks[j].setAttribute('aria-selected', 'false');
+                _navLinks[j].setAttribute('aria-controls',
+                    rolePrefix + _navLinks[j].getAttribute('data-id'));
+            }
+
+            // Vertical drawer accordion detail sections.
+            for (var k = 0; k < accordionItems.length; k++) {
+                detail = accordionItems[k].querySelector('.detail');
+                detail.id = rolePrefix + accordionItems[k].querySelector('.summary').getAttribute('data-id');
+                detail.setAttribute('aria-hidden', 'true');
+            }
+
+            _drawer.setAttribute('aria-hidden', 'true');
+            _menuButton.setAttribute('aria-controls', 'moz-global-nav-drawer');
+            _closeButton.setAttribute('aria-controls', 'moz-global-nav-drawer');
+        },
+
+        /**
          * Adds an element to document.body for the semi-opaque overlay visible
          * when the horizontal drawer menu is open.
          */
@@ -302,6 +358,7 @@
 
                 _menuButton.classList.remove('nav-hidden');
 
+                mozGlobalNav.initARIARoles();
                 mozGlobalNav.createNavMask();
                 mozGlobalNav.bindEvents();
             } else {

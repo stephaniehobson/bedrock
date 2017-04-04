@@ -230,21 +230,18 @@ $mq-nav-desktop:    'screen and (min-width: 1070px)';
         -moz-appearance: none;
         -webkit-appearance: none;
         @include font-size(13px);
-        background: url('/media/img/nav/drawer-close.svg') left center no-repeat;
+        background-color: #000;
         border: none;
-        color: #000;
         height: 22px;
         left: 10px;
         margin-top: 30px;
-        padding: 0 0 0 30px;
+        padding: 0;
         text-transform: uppercase;
-        transition: color 0.1s ease-in-out;
 
-        &:hover,
-        &:focus {
-            transition: color 0.1s ease-in-out;
-            color: #fff;
-        }
+        // &:hover,
+        // &:focus {
+        //
+        // }
 
         &:focus {
             outline: none;
