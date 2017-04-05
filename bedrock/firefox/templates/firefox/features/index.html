@@ -1,0 +1,65 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% extends "firefox/features/base.html" %}
+
+{% block features_header %}
+<h1>{{ _('Firefox Features') }}</h1>
+<p>
+  {{ _('Learn how you can get the most from Firefox and your time online.') }}
+</p>
+{% endblock %}
+
+{% block features_list %}
+<section class="features-list-section">
+  <div class="content">
+    <h2>{{ _('Feature intro statement') }}</h2>
+
+    <ul class="features-list">
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+      <li class="features-list-item">
+        <a href="{{ url('firefox.features') }}private-browsing/">
+          <div class="features-list-image"></div>
+          <h3>{{ _('Private Browsing') }}</h3>
+          <p>{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit.') }}</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

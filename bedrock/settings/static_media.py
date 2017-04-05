@@ -334,6 +334,12 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/firefox_features-bundle.css',
     },
+    'firefox-features-hub': {
+        'source_filenames': (
+            'css/firefox/features-hub.scss',
+        ),
+        'output_filename': 'css/firefox-features-hub-bundle.css',
+    },
     'firefox-interest-dashboard': {
         'source_filenames': (
             'css/firefox/family-nav.less',
