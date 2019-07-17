@@ -17,7 +17,7 @@ from bedrock.settings import path as base_path
 from lib import l10n_utils
 
 LEGAL_DOCS_PATH = base_path('vendor-local', 'src', 'legal-docs')
-CACHE_TIMEOUT = getattr(settings, 'LEGAL_DOCS_CACHE_TIMEOUT', 60 * 60)
+CACHE_TIMEOUT = 1
 # legal-docs locales mapped to bedrock locales when they differ
 # https://github.com/mozilla/bedrock/issues/6000
 LEGAL_DOCS_LOCALES_TO_BEDROCK = {
