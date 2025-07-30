@@ -10,7 +10,7 @@ function init() {
         document.body.classList.add('wnp-uitour');
 
         // main CTA should open New Tab
-        const button = document.querySelector('.wnp-main-cta .mzp-c-button');
+        const button = document.querySelector('main .mzp-c-button');
 
         button.addEventListener(
             'click',
