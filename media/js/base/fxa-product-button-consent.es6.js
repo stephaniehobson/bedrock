@@ -40,7 +40,7 @@ const FxaProductButtonConsent = {
     init: () => {
         // If visitor is in the EU/EAA wait for a consent signal.
         if (consentRequired()) {
-            window.addEventListener(
+            window.onclick(
                 'mozConsentStatus',
                 FxaProductButtonConsent.handleConsent,
                 false
